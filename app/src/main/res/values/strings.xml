@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CoolWeather</string>
     <string name="title_activity_base">BaseActivity</string>
+    <string name="loading_failed">数据加载失败</string>
 </resources>

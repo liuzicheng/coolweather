@@ -5,6 +5,7 @@ import android.content.Context;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.liu.coolweather.LzcApplication;
 import com.liu.coolweather.MainActivity;
 
 /**
@@ -14,15 +15,14 @@ import com.liu.coolweather.MainActivity;
 public class LzcLocatOption {
     private LocationClient mLocationClient;
 
-    private BDLocationListener listener = new LzcLocationListener();
 
-    public LzcLocatOption(Context context){
-        mLocationClient = new LocationClient(context);
+    public LzcLocatOption( ){
+        mLocationClient = new LocationClient(LzcApplication.getContext());
+        BDLocationListener listener = new LzcLocationListener();
         mLocationClient.registerLocationListener(listener);
-        initLocation();
     }
 
-    private void initLocation(){
+    public void initLocation(){
         LocationClientOption option = new LocationClientOption();
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
 //        int span=1000;
@@ -36,5 +36,16 @@ public class LzcLocatOption {
 //        option.SetIgnoreCacheException(false);//可选，默认false，设置是否收集CRASH信息，默认收集
 //        option.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤GPS仿真结果，默认需要
         mLocationClient.setLocOption(option);
+    }
+
+    public void start(){
+        if (mLocationClient != null){
+            mLocationClient.start();
+        }
+    }
+    public void stop(){
+        if (mLocationClient != null){
+            mLocationClient.stop();
+        }
     }
 }

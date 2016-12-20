@@ -6,7 +6,7 @@ package com.liu.coolweather.http;
 
 public class HttpUrl {
     /*服务地址*/
-    private static String serverApi = "https://free-api.heweather.com/v5/";
+    public static String serverApi = "https://free-api.heweather.com/v5/";
     /*7-10天气预报接口 forecast?city=""&key=""&lang=""*/
     private static String forecast ="forecast";
     /*今天天气接口*/

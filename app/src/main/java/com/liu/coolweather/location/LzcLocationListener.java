@@ -10,17 +10,14 @@ public class LzcLocationListener implements BDLocationListener {
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
         switch (bdLocation.getLocType()){
-            case BDLocation.TypeGpsLocation:
-                //定位成功
+            case BDLocation.TypeGpsLocation:// gps定位成功
                 bdLocation.getCity();
                 break;
-            case BDLocation.TypeCriteriaException:
-                //定位失败
-
+            case BDLocation.TypeCriteriaException://gps定位失败
                 break;
-            case BDLocation.TypeNetWorkException:
-                //网络异常 NetWorkError
-
+            case BDLocation.TypeNetWorkException: //网络异常 NetWorkError
+                break;
+            case BDLocation.TypeNetWorkLocation://网络定位成功
                 break;
             default:
                 ToastTool.Makter(LzcApplication.getContext(),"Error:"+bdLocation.getLocType());
