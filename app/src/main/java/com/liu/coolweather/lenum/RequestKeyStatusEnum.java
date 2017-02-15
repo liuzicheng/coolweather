@@ -1,4 +1,4 @@
-package com.liu.coolweather.model;
+package com.liu.coolweather.lenum;
 
 /**
  * Created by LIUZICHENG on 2016/12/17.

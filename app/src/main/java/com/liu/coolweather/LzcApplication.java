@@ -4,12 +4,13 @@ import android.app.Application;
 import android.content.Context;
 
 import org.litepal.LitePal;
+import org.litepal.LitePalApplication;
 
 /**
  * Created by LIUZICHENG on 2016/12/17.
  */
 
-public class LzcApplication extends Application {
+public class LzcApplication extends LitePalApplication {
 
     private static Context context;
 

@@ -1,4 +1,6 @@
-package com.liu.coolweather.model;
+package com.liu.coolweather.bean;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.List;
 
@@ -6,7 +8,8 @@ import java.util.List;
  * Created by LIUZICHENG on 2016/12/17.
  */
 
-public class Weather {
+public class   Weather  extends DataSupport{
+
 
     private List<HeWeather5Entity> HeWeather5;
 
@@ -18,7 +21,7 @@ public class Weather {
         this.HeWeather5 = HeWeather5;
     }
 
-    public static class HeWeather5Entity {
+    public static class HeWeather5Entity  {
         /**
          * basic : {"city":"北京","cnty":"中国","id":"CN101010100","lat":"39.904000","lon":"116.391000","prov":"北京","update":{"loc":"2016-08-31 11:52","utc":"2016-08-31 03:52"}}
          * now : {"cond":{"code":"104","txt":"阴"},"fl":"11","hum":"31","pcpn":"0","pres":"1025","tmp":"13","vis":"10","wind":{"deg":"40","dir":"东北风","sc":"4-5","spd":"24"}}
@@ -53,7 +56,7 @@ public class Weather {
             this.status = status;
         }
 
-        public static class BasicEntity {
+        public static class BasicEntity  {
             /**
              * city : 北京//城市名称
              * cnty : 中国 //国家
@@ -128,7 +131,7 @@ public class Weather {
                 this.update = update;
             }
 
-            public static class UpdateEntity {
+            public static class UpdateEntity  {
                 /**
                  * loc : 2016-08-31 11:52 //当地时间
                  * utc : 2016-08-31 03:52 //UTC时间
@@ -155,7 +158,7 @@ public class Weather {
             }
         }
 
-        public static class NowEntity {
+        public static class NowEntity  {
             /**
              * cond : {"code":"104","txt":"阴"}
              * fl : 11          //体感温度
@@ -312,5 +315,6 @@ public class Weather {
                 }
             }
         }
+
     }
 }

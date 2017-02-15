@@ -1,5 +1,11 @@
 package com.liu.coolweather.tool;
 
+import android.content.Context;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+
+import com.liu.coolweather.LzcApplication;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -122,5 +128,50 @@ public class NetworkTool {
             }
         } catch (Exception ex) { } // for now eat exceptions
         return "";
+    }
+
+    public static String getIP(){
+        //获取wifi服务
+        WifiManager wifiManager = (WifiManager) LzcApplication.getContext().
+                getSystemService(Context.WIFI_SERVICE);
+        //判断wifi是否开启
+        if (!wifiManager.isWifiEnabled()) {
+            wifiManager.setWifiEnabled(true);
+        }
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        int ipAddress = wifiInfo.getIpAddress();
+
+        return intToIp(ipAddress);
+
+    }
+    public String getLocalIpAddress()
+    {
+        try
+        {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();)
+            {
+                NetworkInterface intf = en.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();)
+                {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (!inetAddress.isLoopbackAddress())
+                    {
+                        return inetAddress.getHostAddress().toString();
+                    }
+                }
+            }
+        }
+        catch (SocketException ex)
+        {
+            LogTool.e("WifiPreference IpAddress", ex.toString());
+        }
+        return null;
+    }
+    private static String intToIp(int i) {
+
+        return (i & 0xFF ) + "." +
+                ((i >> 8 ) & 0xFF) + "." +
+                ((i >> 16 ) & 0xFF) + "." +
+                ( i >> 24 & 0xFF) ;
     }
 }
