@@ -122,6 +122,7 @@ public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.ViewHolder
                                 notifyDataSetChanged();
                             } else {
                                 presenterImp.getCounty(selectCity.getProvinceId(), selectCity.getId(), position);
+//
                             }
                         }
                         break;
