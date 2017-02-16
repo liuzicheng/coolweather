@@ -141,10 +141,12 @@ public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         SelectCity selectCity = cities.get(position);
         holder.city_name.setText(cities.get(position).getName());
+        holder.left_image.setVisibility(View.VISIBLE);
         if (selectCity.getDataType() == 1) {
-            holder.city_name.setPadding(70, 0, 0, 0);
+            holder.city_name.setPadding(74,64, 0, 64);
         } else if (selectCity.getDataType() == 2) {
-            holder.city_name.setPadding(100, 0, 0, 0);
+            holder.city_name.setPadding(100, 64, 0, 64);
+            holder.left_image.setVisibility(View.INVISIBLE);
         }
     }
 

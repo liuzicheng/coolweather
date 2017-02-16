@@ -1,10 +1,12 @@
 package com.liu.coolweather.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.liu.coolweather.BaseActivity;
+import com.liu.coolweather.MainActivity;
 import com.liu.coolweather.R;
 import com.liu.coolweather.db.Province;
 import com.liu.coolweather.presenter.ProvinceCityCountyPresenterImp;
@@ -72,5 +74,10 @@ public class SelectCityActivity extends BaseActivity implements SelectAdapterVie
 
     }
 
+    public void setSelectCity(){
+        Intent intent = new Intent(this, MainActivity.class);
+
+        setResult(RESULT_OK,intent);
+    }
 
 }

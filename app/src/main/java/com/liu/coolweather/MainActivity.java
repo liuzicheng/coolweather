@@ -195,6 +195,8 @@ public class MainActivity extends BaseActivity implements MainView {
         }
     }
 
+
+
     @Override
     public void onWeatherLoad(Weather weather) {
         setTextData(weather.getHeWeather5().get(0).getNow());
