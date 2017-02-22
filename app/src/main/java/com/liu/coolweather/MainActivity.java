@@ -195,8 +195,21 @@ public class MainActivity extends BaseActivity implements MainView {
         }
     }
 
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case RESULT_FIRST_USER:
+                if (resultCode == RESULT_OK){
+                    showCityWeather(data.getStringExtra("cityName"),data.getIntExtra("weatherId",0));
+                }
+                break;
+        }
+    }
+    private void showCityWeather(String cityName,int weatherId){
+        title.setText(cityName);
+        rwpi.loadWeather(weatherId+"");
+    }
     @Override
     public void onWeatherLoad(Weather weather) {
         setTextData(weather.getHeWeather5().get(0).getNow());

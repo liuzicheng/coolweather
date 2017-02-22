@@ -1,5 +1,6 @@
 package com.liu.coolweather.ui.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.liu.coolweather.db.City;
 import com.liu.coolweather.db.County;
 import com.liu.coolweather.presenter.ProvinceCityCountyPresenterImp;
 import com.liu.coolweather.tool.LogTool;
+import com.liu.coolweather.ui.SelectCityActivity;
 import com.liu.coolweather.view.SelectAdapterView;
 
 import org.litepal.crud.DataSupport;
@@ -36,9 +38,10 @@ public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.ViewHolder
         */
     private List<SelectCity> cities;
     ProvinceCityCountyPresenterImp presenterImp;
-
-    public SelectAdapter(List<SelectCity> cityList) {
+    private Context context ;
+    public SelectAdapter(List<SelectCity> cityList,Context context) {
         this.cities = cityList;
+        this.context = context;
         presenterImp = new ProvinceCityCountyPresenterImp(this);
     }
 
@@ -128,7 +131,9 @@ public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.ViewHolder
                         break;
                     case 2://县
                         //确定选择的地址。
-
+                        if(context instanceof SelectCityActivity){
+                            ((SelectCityActivity)context).setSelectCity(selectCity);
+                        }
                         break;
                 }
 
@@ -142,6 +147,7 @@ public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.ViewHolder
         SelectCity selectCity = cities.get(position);
         holder.city_name.setText(cities.get(position).getName());
         holder.left_image.setVisibility(View.VISIBLE);
+        holder.city_name.setPadding(64,64, 0, 64);
         if (selectCity.getDataType() == 1) {
             holder.city_name.setPadding(74,64, 0, 64);
         } else if (selectCity.getDataType() == 2) {
@@ -162,7 +168,6 @@ public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.ViewHolder
 
     @Override
     public void resultCity(List<SelectCity> cityList, int position) {
-
         cities.get(position).setOpen(true);
         cities.addAll(position + 1, cityList);
         notifyDataSetChanged();

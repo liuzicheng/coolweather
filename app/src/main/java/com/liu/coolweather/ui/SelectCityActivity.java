@@ -37,7 +37,7 @@ public class SelectCityActivity extends BaseActivity implements SelectAdapterVie
         presenterImp = new ProvinceCityCountyPresenterImp(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recycler.setLayoutManager(linearLayoutManager);
-        adapter = new SelectAdapter(selectCityList);
+        adapter = new SelectAdapter(selectCityList,this);
         recycler.setAdapter(adapter);
         queryProvince();
     }
@@ -74,9 +74,10 @@ public class SelectCityActivity extends BaseActivity implements SelectAdapterVie
 
     }
 
-    public void setSelectCity(){
+    public void setSelectCity(SelectCity selectCity){
         Intent intent = new Intent(this, MainActivity.class);
-
+        intent.putExtra("cityName",selectCity.getName());
+        intent.putExtra("weatherId",selectCity.getWeatherId());
         setResult(RESULT_OK,intent);
     }
 
