@@ -79,6 +79,7 @@ public class SelectCityActivity extends BaseActivity implements SelectAdapterVie
         intent.putExtra("cityName",selectCity.getName());
         intent.putExtra("weatherId",selectCity.getWeatherId());
         setResult(RESULT_OK,intent);
+        finish();
     }
 
 }

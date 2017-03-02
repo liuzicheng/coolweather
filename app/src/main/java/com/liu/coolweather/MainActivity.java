@@ -90,7 +90,7 @@ public class MainActivity extends BaseActivity implements MainView {
         title.setText(getString(R.string.app));
         fruitImageView.setImageDrawable(defaultFruit);
         setSupportActionBar(toolbar);
-//        rwpi = new RequestWeatherPresenterImp(this);
+        rwpi = new RequestWeatherPresenterImp(this);
 //        pccpi = new ProvinceCityCountyPresenterImp();
 //        pccpi.getCounty(11,46);
 //        loadDB();
@@ -114,14 +114,15 @@ public class MainActivity extends BaseActivity implements MainView {
             public void success() {
                 city = SharedTool.readString("city", "beijing");
                 LogTool.i(city);
-                requ(city);
+                rwpi.loadWeather(city);
+
             }
 
             @Override
             public void fail() {
                 String ip = NetworkTool.getIP();
                 LogTool.i(ip);
-                requ(ip);
+                rwpi.loadWeather(ip);
             }
         });
     }
@@ -141,10 +142,6 @@ public class MainActivity extends BaseActivity implements MainView {
                 break;
         }
         return true;
-    }
-
-    private void requ(String city) {
-        rwpi.loadWeather(city);
     }
 
     private void setTextData(Weather.HeWeather5Entity.NowEntity nowEntity) {
@@ -178,10 +175,10 @@ public class MainActivity extends BaseActivity implements MainView {
             case BAIDU_GET_LOCATION:
                 if (grantResults[0] == PERMISSION_GRANTED) {
                     //动态获取到权限
+
                 } else {
                     //没有获取到权限
                     ToastTool.Makter(this, "获取定位权限失败");
-
                 }
                 break;
         }
@@ -201,14 +198,14 @@ public class MainActivity extends BaseActivity implements MainView {
         switch (requestCode){
             case RESULT_FIRST_USER:
                 if (resultCode == RESULT_OK){
-                    showCityWeather(data.getStringExtra("cityName"),data.getIntExtra("weatherId",0));
+                    showCityWeather(data.getStringExtra("cityName"),data.getStringExtra("weatherId"));
                 }
                 break;
         }
     }
-    private void showCityWeather(String cityName,int weatherId){
+    private void showCityWeather(String cityName,String weatherId){
         title.setText(cityName);
-        rwpi.loadWeather(weatherId+"");
+        rwpi.loadWeather(weatherId);
     }
     @Override
     public void onWeatherLoad(Weather weather) {
